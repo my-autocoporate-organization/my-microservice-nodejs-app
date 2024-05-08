@@ -54,30 +54,30 @@ services:
     #       target: /code
     container_name: customer
     hostname: customer
-    # scale: 2
+    scale: 2
     ports:
       - 5001
     # depends_on:
     #   - nosql-db
     #   - message-queue
     environment:
-      NODE_ENV: 'prod'
-      MONGODB_PREFIX: 'mongodb+srv'
-      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
-      MONGODB_PORT: 80
-      MONGODB_USERNAME: hieunguyenminh561
-      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
-      MONGODB_DB: shopping-app_customer
-      MSG_QUEUE_PREFIX: 'amqps'
-      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
-      MSG_QUEUE_PORT: '80'
-      MSG_QUEUE_USERNAME: ponawrrq
-      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
-      EXCHANGE_NAME: ONLINE_STORE
-      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
-      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
-      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
-      APP_SECRET: jg_youtube_tutorial
+      # NODE_ENV: 'prod'
+      # MONGODB_PREFIX: 'mongodb+srv'
+      # MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      # MONGODB_PORT: 80
+      # MONGODB_USERNAME: hieunguyenminh561
+      # MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      # MONGODB_DB: shopping-app_customer
+      # MSG_QUEUE_PREFIX: 'amqps'
+      # MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      # MSG_QUEUE_PORT: '80'
+      # MSG_QUEUE_USERNAME: ponawrrq
+      # MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      # EXCHANGE_NAME: ONLINE_STORE
+      # SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      # PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      # CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      # APP_SECRET: jg_youtube_tutorial
       PORT: 5001
     volumes:
       - .:/app
@@ -94,30 +94,30 @@ services:
     #       target: /code
     container_name: product
     hostname: product
-    # scale: 2
+    scale: 2
     ports:
       - 5002
     # depends_on:
     #   - nosql-db
     #   - message-queue
     environment:
-      NODE_ENV: 'prod'
-      MONGODB_PREFIX: 'mongodb+srv'
-      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
-      MONGODB_PORT: 80
-      MONGODB_USERNAME: hieunguyenminh561
-      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
-      MONGODB_DB: shopping-app_product
-      MSG_QUEUE_PREFIX: 'amqps'
-      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
-      MSG_QUEUE_PORT: '80'
-      MSG_QUEUE_USERNAME: ponawrrq
-      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
-      EXCHANGE_NAME: ONLINE_STORE
-      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
-      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
-      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
-      APP_SECRET: jg_youtube_tutorial
+      # NODE_ENV: 'prod'
+      # MONGODB_PREFIX: 'mongodb+srv'
+      # MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      # MONGODB_PORT: 80
+      # MONGODB_USERNAME: hieunguyenminh561
+      # MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      # MONGODB_DB: shopping-app_product
+      # MSG_QUEUE_PREFIX: 'amqps'
+      # MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      # MSG_QUEUE_PORT: '80'
+      # MSG_QUEUE_USERNAME: ponawrrq
+      # MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      # EXCHANGE_NAME: ONLINE_STORE
+      # SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      # PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      # CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      # APP_SECRET: jg_youtube_tutorial
       PORT: 5002
     volumes:
       - .:/app
@@ -134,30 +134,30 @@ services:
     #       target: /code
     container_name: shopping
     hostname: shopping
-    # scale: 2
+    scale: 2
     ports:
       - 5003
     # depends_on:
     #   - nosql-db
     #   - message-queue
     environment:
-      NODE_ENV: 'prod'
-      MONGODB_PREFIX: 'mongodb+srv'
-      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
-      MONGODB_PORT: 80
-      MONGODB_USERNAME: hieunguyenminh561
-      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
-      MONGODB_DB: shopping-app_shopping
-      MSG_QUEUE_PREFIX: 'amqps'
-      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
-      MSG_QUEUE_PORT: '80'
-      MSG_QUEUE_USERNAME: ponawrrq
-      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
-      EXCHANGE_NAME: ONLINE_STORE
-      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
-      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
-      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
-      APP_SECRET: jg_youtube_tutorial
+      # NODE_ENV: 'prod'
+      # MONGODB_PREFIX: 'mongodb+srv'
+      # MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      # MONGODB_PORT: 80
+      # MONGODB_USERNAME: hieunguyenminh561
+      # MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      # MONGODB_DB: shopping-app_shopping
+      # MSG_QUEUE_PREFIX: 'amqps'
+      # MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      # MSG_QUEUE_PORT: '80'
+      # MSG_QUEUE_USERNAME: ponawrrq
+      # MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      # EXCHANGE_NAME: ONLINE_STORE
+      # SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      # PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      # CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      # APP_SECRET: jg_youtube_tutorial
       PORT: 5003
     volumes:
       - .:/app
