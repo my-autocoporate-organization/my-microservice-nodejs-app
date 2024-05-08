@@ -52,7 +52,7 @@ services:
     #     - action: sync
     #       path: ./customer
     #       target: /code
-    container_name: customer
+    # container_name: customer
     hostname: customer
     scale: 2
     ports:
@@ -92,7 +92,7 @@ services:
     #     - action: sync
     #       path: ./product
     #       target: /code
-    container_name: product
+    # container_name: product
     hostname: product
     scale: 2
     ports:
@@ -132,7 +132,7 @@ services:
     #     - action: sync
     #       path: ./shopping
     #       target: /code
-    container_name: shopping
+    # container_name: shopping
     hostname: shopping
     scale: 2
     ports:
