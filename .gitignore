@@ -1,0 +1,10 @@
+/customer/node_modules/
+/gateway/node_modules/
+/product/node_modules/
+/shopping/node_modules/
+/db
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+docker-compose.yml
