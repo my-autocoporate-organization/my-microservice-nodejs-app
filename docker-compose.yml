@@ -1,0 +1,177 @@
+services:
+  # nosql-db:
+  #   image: mongo
+  #   # restart: always
+  #   command: [--auth]
+  #   # command: "mongosh --authenticationDatabase admin"
+  #   container_name: nosql-db
+  #   ports:
+  #     - 27018:27018
+  #   volumes:
+  #     - ./db:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: '12345'
+  #   #   MONGO_INITDB_DATABASE: shopping-app_customer
+  #   #   AUTH: yes
+  
+  # db-client:
+  #   image: mongo-express
+  #   # restart: always
+  #   container_name: db-client
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:12345@nosql-db/
+  #     ME_CONFIG_BASICAUTH_USERNAME: root
+  #     ME_CONFIG_BASICAUTH_PASSWORD: '12345'
+  #     ME_CONFIG_BASICAUTH: true
+  #     # ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     # ME_CONFIG_MONGODB_ADMINPASSWORD: '12345'
+  #     # ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+  #     # ME_CONFIG_MONGODB_AUTH_USERNAME: root
+  #     # ME_CONFIG_MONGODB_AUTH_PASSWORD: '12345'
+  #   depends_on:
+  #     - nosql-db
+  
+  # message-queue:
+  #   image: rabbitmq:3.13.1-alpine
+  #   container_name: message-queue
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: guest
+  #     RABBITMQ_DEFAULT_PASS: guest
+  #   ports:
+  #     - 5673:5673
+  
+  customer:
+    build:
+      dockerfile: Dockerfile
+      context: ./customer
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./customer
+    #       target: /code
+    container_name: customer
+    hostname: customer
+    # scale: 2
+    ports:
+      - 5001
+    # depends_on:
+    #   - nosql-db
+    #   - message-queue
+    environment:
+      NODE_ENV: 'prod'
+      MONGODB_PREFIX: 'mongodb+srv'
+      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      MONGODB_PORT: 80
+      MONGODB_USERNAME: hieunguyenminh561
+      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      MONGODB_DB: shopping-app_customer
+      MSG_QUEUE_PREFIX: 'amqps'
+      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      MSG_QUEUE_PORT: '80'
+      MSG_QUEUE_USERNAME: ponawrrq
+      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      EXCHANGE_NAME: ONLINE_STORE
+      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      APP_SECRET: jg_youtube_tutorial
+      PORT: 5001
+    volumes:
+      - .:/app
+      - /app/customer/node_modules
+  
+  product:
+    build:
+      dockerfile: Dockerfile
+      context: ./product
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./product
+    #       target: /code
+    container_name: product
+    hostname: product
+    # scale: 2
+    ports:
+      - 5002
+    # depends_on:
+    #   - nosql-db
+    #   - message-queue
+    environment:
+      NODE_ENV: 'prod'
+      MONGODB_PREFIX: 'mongodb+srv'
+      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      MONGODB_PORT: 80
+      MONGODB_USERNAME: hieunguyenminh561
+      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      MONGODB_DB: shopping-app_product
+      MSG_QUEUE_PREFIX: 'amqps'
+      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      MSG_QUEUE_PORT: '80'
+      MSG_QUEUE_USERNAME: ponawrrq
+      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      EXCHANGE_NAME: ONLINE_STORE
+      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      APP_SECRET: jg_youtube_tutorial
+      PORT: 5002
+    volumes:
+      - .:/app
+      - /app/product/node_modules
+  
+  shopping:
+    build:
+      dockerfile: Dockerfile
+      context: ./shopping
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./shopping
+    #       target: /code
+    container_name: shopping
+    hostname: shopping
+    # scale: 2
+    ports:
+      - 5003
+    # depends_on:
+    #   - nosql-db
+    #   - message-queue
+    environment:
+      NODE_ENV: 'prod'
+      MONGODB_PREFIX: 'mongodb+srv'
+      MONGODB_HOST: 'cluster0.4ignjzf.mongodb.net'
+      MONGODB_PORT: 80
+      MONGODB_USERNAME: hieunguyenminh561
+      MONGODB_PASSWORD: HzdI4LhnX3Sn5LiB
+      MONGODB_DB: shopping-app_shopping
+      MSG_QUEUE_PREFIX: 'amqps'
+      MSG_QUEUE_HOST: gerbil.rmq.cloudamqp.com/ponawrrq
+      MSG_QUEUE_PORT: '80'
+      MSG_QUEUE_USERNAME: ponawrrq
+      MSG_QUEUE_PASSWORD: Qiihup6--n3uij95aLif3HuMBtXcGJMc
+      EXCHANGE_NAME: ONLINE_STORE
+      SHOPPING_BINDING_KEY: SHOPPING_SERVICE
+      PRODUCT_BINDING_KEY: PRODUCT_SERVICE
+      CUSTOMER_BINDING_KEY: CUSTOMER_SERVICE
+      APP_SECRET: jg_youtube_tutorial
+      PORT: 5003
+    volumes:
+      - .:/app
+      - /app/shopping/node_modules
+  
+  nginx-proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: nginx-proxy
+    depends_on:
+      - product
+      - shopping
+      - customer
+    ports:
+      - 80:80
+  
