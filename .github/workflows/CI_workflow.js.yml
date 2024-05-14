@@ -25,5 +25,5 @@ jobs:
     - name: Test Customer service
       working-directory: ./customer
       run: |
-        npm ci
+        npm i
         npm test
