@@ -8,7 +8,7 @@ module.exports = async() => {
         await mongoose.connect(DB_URL, {
             autoIndex: true
         });
-        console.log('Db Connected');
+        console.log('Db Connected!!');
         
     } catch (error) {
         console.log('Error ============')
