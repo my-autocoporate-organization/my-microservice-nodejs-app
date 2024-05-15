@@ -17,78 +17,78 @@ jobs:
       working-directory: ./customer
       run: |
         touch .env
-        echo APP_SECRET=jg_youtube_tutorial >> .env
+        echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
         echo EXCHANGE_NAME=ONLINE_STORE >> .env
         echo SHOPPING_BINDING_KEY=SHOPPING_SERVICE >> .env
         echo PRODUCT_BINDING_KEY=PRODUCT_SERVICE >> .env
         echo CUSTOMER_BINDING_KEY=CUSTOMER_SERVICE >> .env
         echo MONGODB_PREFIX=mongodb+srv >> .env
-        echo MONGODB_HOST=cluster0.4ignjzf.mongodb.net >> .env
-        echo MONGODB_PORT=80 >> .env
-        echo MONGODB_USERNAME=hieunguyenminh561 >> .env
-        echo MONGODB_PASSWORD=HzdI4LhnX3Sn5LiB >> .env
+        echo MONGODB_HOST=${{ secrets.QA_MONGODB_HOST }} >> .env
+        echo MONGODB_PORT=${{ secrets.QA_MONGODB_PORT }} >> .env
+        echo MONGODB_USERNAME=${{ secrets.QA_MONGODB_USERNAME }} >> .env
+        echo MONGODB_PASSWORD=${{ secrets.QA_MONGODB_PASSWORD }} >> .env
         echo MONGODB_DB=shopping-app_customer >> .env
         echo MSG_QUEUE_PREFIX=amqps >> .env
-        echo MSG_QUEUE_HOST=gerbil.rmq.cloudamqp.com/ponawrrq >> .env
-        echo MSG_QUEUE_PORT=80 >> .env
-        echo MSG_QUEUE_USERNAME=ponawrrq >> .env
-        echo MSG_QUEUE_PASSWORD=Qiihup6--n3uij95aLif3HuMBtXcGJMc >> .env
+        echo MSG_QUEUE_HOST=${{ secrets.QA_MSG_QUEUE_HOST }} >> .env
+        echo MSG_QUEUE_PORT=${{ secrets.QA_MSG_QUEUE_PORT }} >> .env
+        echo MSG_QUEUE_USERNAME=${{ secrets.QA_MSG_QUEUE_USERNAME }} >> .env
+        echo MSG_QUEUE_PASSWORD=${{ secrets.QA_MSG_QUEUE_PASSWORD }} >> .env
         cat .env
       
     - name: Create .env file for product
       working-directory: ./product
       run: |
         touch .env
-        echo APP_SECRET=jg_youtube_tutorial >> .env
+        echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
         echo EXCHANGE_NAME=ONLINE_STORE >> .env
         echo SHOPPING_BINDING_KEY=SHOPPING_SERVICE >> .env
         echo PRODUCT_BINDING_KEY=PRODUCT_SERVICE >> .env
         echo CUSTOMER_BINDING_KEY=CUSTOMER_SERVICE >> .env
         echo MONGODB_PREFIX=mongodb+srv >> .env
-        echo MONGODB_HOST=cluster0.4ignjzf.mongodb.net >> .env
-        echo MONGODB_PORT=80 >> .env
-        echo MONGODB_USERNAME=hieunguyenminh561 >> .env
-        echo MONGODB_PASSWORD=HzdI4LhnX3Sn5LiB >> .env
+        echo MONGODB_HOST=${{ secrets.QA_MONGODB_HOST }} >> .env
+        echo MONGODB_PORT=${{ secrets.QA_MONGODB_PORT }} >> .env
+        echo MONGODB_USERNAME=${{ secrets.QA_MONGODB_USERNAME }} >> .env
+        echo MONGODB_PASSWORD=${{ secrets.QA_MONGODB_PASSWORD }} >> .env
         echo MONGODB_DB=shopping-app_product >> .env
         echo MSG_QUEUE_PREFIX=amqps >> .env
-        echo MSG_QUEUE_HOST=gerbil.rmq.cloudamqp.com/ponawrrq >> .env
-        echo MSG_QUEUE_PORT=80 >> .env
-        echo MSG_QUEUE_USERNAME=ponawrrq >> .env
-        echo MSG_QUEUE_PASSWORD=Qiihup6--n3uij95aLif3HuMBtXcGJMc >> .env
+        echo MSG_QUEUE_HOST=${{ secrets.QA_MSG_QUEUE_HOST }} >> .env
+        echo MSG_QUEUE_PORT=${{ secrets.QA_MSG_QUEUE_PORT }} >> .env
+        echo MSG_QUEUE_USERNAME=${{ secrets.QA_MSG_QUEUE_USERNAME }} >> .env
+        echo MSG_QUEUE_PASSWORD=${{ secrets.QA_MSG_QUEUE_PASSWORD }} >> .env
         cat .env
     
     - name: Create .env file for shopping
       working-directory: ./shopping
       run: |
         touch .env
-        echo APP_SECRET=jg_youtube_tutorial >> .env
+        echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
         echo EXCHANGE_NAME=ONLINE_STORE >> .env
         echo SHOPPING_BINDING_KEY=SHOPPING_SERVICE >> .env
         echo PRODUCT_BINDING_KEY=PRODUCT_SERVICE >> .env
         echo CUSTOMER_BINDING_KEY=CUSTOMER_SERVICE >> .env
         echo MONGODB_PREFIX=mongodb+srv >> .env
-        echo MONGODB_HOST=cluster0.4ignjzf.mongodb.net >> .env
-        echo MONGODB_PORT=80 >> .env
-        echo MONGODB_USERNAME=hieunguyenminh561 >> .env
-        echo MONGODB_PASSWORD=HzdI4LhnX3Sn5LiB >> .env
-        echo MONGODB_DB=shopping-app_product >> .env
+        echo MONGODB_HOST=${{ secrets.QA_MONGODB_HOST }} >> .env
+        echo MONGODB_PORT=${{ secrets.QA_MONGODB_PORT }} >> .env
+        echo MONGODB_USERNAME=${{ secrets.QA_MONGODB_USERNAME }} >> .env
+        echo MONGODB_PASSWORD=${{ secrets.QA_MONGODB_PASSWORD }} >> .env
+        echo MONGODB_DB=shopping-app_shopping >> .env
         echo MSG_QUEUE_PREFIX=amqps >> .env
-        echo MSG_QUEUE_HOST=gerbil.rmq.cloudamqp.com/ponawrrq >> .env
-        echo MSG_QUEUE_PORT=80 >> .env
-        echo MSG_QUEUE_USERNAME=ponawrrq >> .env
-        echo MSG_QUEUE_PASSWORD=Qiihup6--n3uij95aLif3HuMBtXcGJMc >> .env
+        echo MSG_QUEUE_HOST=${{ secrets.QA_MSG_QUEUE_HOST }} >> .env
+        echo MSG_QUEUE_PORT=${{ secrets.QA_MSG_QUEUE_PORT }} >> .env
+        echo MSG_QUEUE_USERNAME=${{ secrets.QA_MSG_QUEUE_USERNAME }} >> .env
+        echo MSG_QUEUE_PASSWORD=${{ secrets.QA_MSG_QUEUE_PASSWORD }} >> .env
         cat .env
 
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
 
-    # - name: Deploy to EB
-    #   uses: einaregilsson/beanstalk-deploy@v22
-    #   with:
-    #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     application_name: ms-shopping-app
-    #     environment_name: ms-shopping-app-env
-    #     version_label: "ver-${{ github.sha }}"
-    #     region: ap-southeast-2
-    #     deployment_package: deploy.zip
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: ms-shopping-app
+        environment_name: ms-shopping-app-env
+        version_label: "ver-${{ github.sha }}"
+        region: ap-southeast-2
+        deployment_package: deploy.zip
