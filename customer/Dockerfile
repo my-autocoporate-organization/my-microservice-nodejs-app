@@ -17,9 +17,9 @@ ENV NODE_ENV=prod
 # Leverage a bind mounts to package.json and yarn.lock to avoid having to copy them into
 # into this layer.
 RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=yarn.lock,target=yarn.lock \
-    --mount=type=cache,target=/root/.yarn \
-    yarn
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm install
 
 # Run the application as a non-root user.
 USER node
